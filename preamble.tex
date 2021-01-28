@@ -1,0 +1,28 @@
+% Common packages/environments to remove clutter
+
+% Packages
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath, amsfonts, amssymb, amsthm, enumitem, tikz}
+
+% Problem environment
+\newtheoremstyle{emptyplain}
+    {}          % default space above
+    {}          % default space below
+    {}          % default body font
+    {}          % no indent
+    {\bfseries} % head font
+    {.}         % punctuation after theorem head
+    { }         % space after theorem head
+    {#3}
+\theoremstyle{emptyplain}
+\newtheorem*{problem}{}
+
+% Solution Environment
+\newenvironment{solution}{
+  \begin{proof}[Solution]
+    \vspace{-2px}
+    \setlength{\parskip}{4px}
+    \setlength{\parindent}{0px}
+}{
+\end{proof}
+}
