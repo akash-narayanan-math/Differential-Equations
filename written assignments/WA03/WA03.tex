@@ -1,0 +1,214 @@
+\documentclass[11pt, titlepage]{article}
+\input{../../preamble}
+\usepackage{caption, subcaption}
+
+% Opening
+\title{Math 2552 Written HW Set 3}
+\author{Akash Narayanan}
+\date{February 9, 2021}
+
+\begin{document}
+  \maketitle
+
+  % Judson 3.2 #11
+  \begin{problem}[Judson 3.2.11]
+    Consider the system
+    \begin{align*}
+      x' &= ax + y \\
+      y' &= 2ax + 2y,
+    \end{align*}
+    where \(a \in \mathbb{R}\).
+    For what values of \(a\) do you find a bifurcation
+    (a change in the type of phase portrait)?
+    Sketch typical phase portraits for a value of \(a\) above and below the bifurcation point.
+  \end{problem}
+
+  \begin{solution}
+    We start by rewriting the system in matrix form \(\vec{x} \,' = A \vec{x}\) where
+    \begin{equation*}
+      A =
+      \begin{pmatrix}
+        a & 1 \\
+        2a & 2
+      \end{pmatrix}
+    \end{equation*}
+    The characteristic polynomial is \(\det (A - \lambda I) = \lambda^{2} - (a + 2) \lambda\).
+    Setting this equal to 0 and solving for \(\lambda\) yields the eigenvalues \(\lambda_{1} = 0\) and \(\lambda_{2} = a + 2\).
+    From here it is clear that there is a bifurcation at \(a = -2\), where \(\lambda_{2}\) changes sign.
+
+    By solving the system \((A - \lambda I)\vec{v} = \vec{0}\), we obtain the following eigenvectors:
+    \begin{align*}
+      \vec{v}_{1} =
+      \begin{pmatrix}
+        1 \\
+        -a
+      \end{pmatrix}
+      &&
+      \vec{v}_{2} =
+      \begin{pmatrix}
+        1 \\
+        2
+      \end{pmatrix}
+    \end{align*}
+    Note that the eigenvalue associated with \(\vec{v}_{1}\) is 0.
+    That is, the points along this line are equilibrium solutions to the system of equations.
+
+    We have that the general solution to the system is
+    \begin{equation*}
+      \vec{x} \,' = c_{1}
+      \begin{pmatrix}
+        1 \\
+        -a
+      \end{pmatrix}
+      + c_{2} e^{(a + 2) t}
+      \begin{pmatrix}
+        1 \\
+        2
+      \end{pmatrix}
+    \end{equation*}
+    Now we draw two phase portraits for values of \(a\) above and below -2.
+    \begin{figure}[h]
+      \centering
+      \begin{subfigure}[b]{0.35\textwidth}
+        \centering
+        \def\svgwidth{0.9\columnwidth}
+        \import{media/}{phasePortrait1.pdf_tex}
+        \captionsetup{labelformat=empty}
+        \caption{\(a = 1\)}
+      \end{subfigure}
+      \begin{subfigure}[b]{0.35\textwidth}
+        \centering
+        \def\svgwidth{0.9\columnwidth}
+        \import{media/}{phasePortrait2.pdf_tex}
+        \captionsetup{labelformat=empty}
+        \caption{\(a = -4\)}
+      \end{subfigure}
+    \end{figure}
+
+  \end{solution}
+
+  \pagebreak
+
+  % Judson 3.4 #3
+  \begin{problem}[Judson 3.4.3]
+    Find the general solution of the linear system shown below and give a sketch of the phase portrait with a few solution curves.
+    \begin{align*}
+      x' &= -x - 4y \\
+      y' &= 3x - 2y
+    \end{align*}
+  \end{problem}
+
+  \begin{solution}
+    We rewrite the system in matrix form \(\vec{x} \,' = A \vec{x}\) where
+    \begin{equation*}
+      A =
+      \begin{pmatrix}
+        -1 & -4 \\
+        3 & -2
+      \end{pmatrix}
+    \end{equation*}
+    This matrix has the eigenvalues \(\lambda_{1, 2} = -3 / 2 \pm i \sqrt{47} / 2\).
+    % \begin{equation*}
+    %   \lambda_{1, 2} = -\frac{3}{2} \pm \frac{\sqrt{47}}{2} i
+    % \end{equation*}
+    The corresponding eigenvectors are
+    \begin{align*}
+      \vec{v}_{1} =
+      \begin{pmatrix}
+        1 + i \sqrt{47} \\
+        6
+      \end{pmatrix}
+      &&
+      \vec{v}_{2} =
+      \begin{pmatrix}
+        1 - i \sqrt{47} \\
+        6
+      \end{pmatrix}
+    \end{align*}
+    Now we can define \(\vec{w}_{1} = e^{\lambda_{1}t} \vec{v}_{1}\). Expanding this and using Euler's formula yields
+    \begin{align*}
+      \vec{w}_{1}
+      % &= e^{-\frac{3}{2}t} e^{i \frac{\sqrt{47}}{2}t}
+      % \begin{pmatrix}
+      %   1 + i \sqrt{47} \\
+      %   6
+      % \end{pmatrix} \\
+      &= e^{-\frac{3}{2}t} \left( \cos \left(\frac{\sqrt{47}}{2}t \right) + i \sin \left( \frac{\sqrt{47}}{2}t \right)\right)
+      \begin{pmatrix}
+        1 + i \sqrt{47} \\
+        6
+      \end{pmatrix} \\
+      &= e^{-\frac{3}{2}t}
+      \begin{pmatrix}
+        \cos(\frac{\sqrt{47}}{2} t) - \sqrt{47} \sin(\frac{\sqrt{47}}{2} t) \\
+        6 \cos(\frac{\sqrt{47}}{2} t)
+      \end{pmatrix}
+      + i e^{-\frac{3}{2} t}
+      \begin{pmatrix}
+        \sqrt{47} \cos(\frac{\sqrt{47}}{2} t) + \sin(\frac{\sqrt{47}}{2} t) \\
+        6 \sin(\frac{\sqrt{47}}{2} t)
+      \end{pmatrix}
+    \end{align*}
+    Then the general solution is
+    \begin{equation*}
+      \vec{x}(t) = c_{1} e^{-\frac{3}{2} t}
+      \begin{pmatrix}
+        \cos(\frac{\sqrt{47}}{2} t) - \sqrt{47} \sin(\frac{\sqrt{47}}{2} t) \\
+        6 \cos(\frac{\sqrt{47}}{2} t)
+      \end{pmatrix} +
+      c_{2} e^{-\frac{3}{2} t}
+      \begin{pmatrix}
+        \sqrt{47} \cos(\frac{\sqrt{47}}{2} t) + \sin(\frac{\sqrt{47}}{2} t) \\
+        6 \sin(\frac{\sqrt{47}}{2} t)
+      \end{pmatrix}
+    \end{equation*}
+
+    \begin{figure}[h]
+      \centering
+      \def\svgwidth{0.3\columnwidth}
+      \import{media/}{phasePortrait3.pdf_tex}
+      \captionsetup{labelformat=empty}
+      \caption{A phase portrait for the linear system}
+    \end{figure}
+  \end{solution}
+
+  \pagebreak
+
+  % Judson 3.5 #7
+  \begin{problem}[Judson 3.5.7]
+    Solve the following linear system for the given initial values and give a sketch of the phase portrait with a few solution curves.
+    \begin{align*}
+      x' &= 9x + 4y \\
+      y' &= -9x - 3y \\
+      x(0) &= 2 \\
+      y(0) &= -3
+    \end{align*}
+  \end{problem}
+
+  \begin{solution}
+    We start by rewriting the system in matrix form \(\vec{x} \,' = A \vec{x}\) where
+    \begin{equation*}
+      A =
+      \begin{pmatrix}
+        9 & 4 \\
+        -9 & - 3
+      \end{pmatrix}
+    \end{equation*}
+    The eigenvalue is \(\lambda = 3\) with multiplicity 2.
+    The corresponding eigenvector is
+    \begin{equation*}
+      \vec{v} =
+      \begin{pmatrix}
+        -2 \\
+        3
+      \end{pmatrix}
+    \end{equation*}
+    \begin{figure}[h]
+      \centering
+      \def\svgwidth{0.5\columnwidth}
+      \import{media/}{phasePortrait4.pdf_tex}
+      \captionsetup{labelformat=empty}
+      \caption{A sketch of the solution curve}
+    \end{figure}
+  \end{solution}
+\end{document}

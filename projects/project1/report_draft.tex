@@ -151,30 +151,39 @@
    The integral can be solved via integration by parts, letting \(u = 11t + 3015\) and \(v' = e^{kt}\). Then \(u' = 11\) and \(v = e^{kt} / k\) and the integral becomes
    \begin{align*}
      \int e^{kt} (11t + 3015) dt &= \frac{(11t + 3015) e^{kt}}{k} - \int \frac{11 e^{kt}}{k} dt \\
-     &= \frac{(11t + 3015) e^{kt}}{k} - \frac{11 e^{kt}}{k^{2}}
+     &= \frac{(11t + 3015) e^{kt}}{k} - \frac{11 e^{kt}}{k^{2}} + C
    \end{align*}
    Substituting this back into the equation for \(S\), we finally obtain
    \begin{align*}
-     S(t) &= e^{-kt} \cdot \frac{k}{100} \left( \frac{(11t + 3015) e^{kt}}{k} - \frac{11 e^{kt}}{k^{2}} \right) \\
-     &= 0.11 (t - \frac{1}{k}) + 30.15
+     S(t) &= e^{-kt} \cdot \frac{k}{100} \left( \frac{(11t + 3015) e^{kt}}{k} - \frac{11 e^{kt}}{k^{2}} + C \right) \\
+     &= 0.11 (t - \frac{1}{k}) + 30.15 + C e^{-kt}
    \end{align*}
-   Recall that \(S(0) = T_{0} = 28.7\) (based on the data from the table).
-   Then \(k \approx 0.076\) and \(S(t) = 0.11 \cdot t + 28.7\).
-
+   Recall that \(S(0) = T_{0} = 30.15\) (based on the the linear regression model of the data).
+   Then \(C = \frac{0.11}{k}\) and
+   \begin{equation*}
+     S(t) = 0.11(t - \frac{0.11}{k}) + 30.15 + \frac{0.11}{k}e^{-kt}
+   \end{equation*}
+   Experimental data shows that \(S(51) = 33.6\). Using this, we determine that the value of \(k \approx 0.022\).
+   That is, we have
+   \begin{equation*}
+     S(t) = 0.11t - 5e^{-0.022t} + 29.6
+   \end{equation*}
    Now that we have obtained \(S(t)\), we compare it to \(T(t)\) graphically.
    \begin{center}
      \begin{tikzpicture}
        \begin{axis}
-         [width = \textwidth, height=0.75\textwidth, xmin=0, xmax=90, legend cell align= {left}, legend pos = north west]
+         [width = \textwidth, height=0.75\textwidth, xmin=0, xmax=90, xlabel={Time (minutes)}, ylabel={Temperature (degrees Celsius)}, legend cell align= {left}, legend pos = north west]
          \addplot [color=red, domain=0:90] {0.11*x + 30.15};
          \addlegendentry{\(T(t)\)}
-         \addplot [color=blue, domain=0:90] {0.11*x + 28.7};
+         \addplot [color=blue, domain=0:90] {0.11*x - 5*e^(-0.022*x) + 29.6};
          \addlegendentry{\(S(t)\)}
        \end{axis}
      \end{tikzpicture}
    \end{center}
 
-   Since the snail and water have different initial temperatures, I clearly messed up somewhere along the way.
+   Although the snail and the water have different initial temperatures, the model seems to accurately reflect our assumption.
+   The rate at which the snail's temperature increases is proportional to the difference between its current temperature and that of the water.
+   Thus, as it continues to heat up it does so at a slower rate due to the insulating shell.
 
    All of our models so far are based on the original assumption that the temperature of the tide pool increases at a constant rate.
    However, this is not necessarily accurate as one considers that Newton's Law of Cooling applies to the environment heating these pools as well.
@@ -245,7 +254,7 @@
    \begin{center}
      \begin{tikzpicture}
        \begin{axis}
-         [xmin = 0, xmax = 5, ymin = 1, width = \textwidth, height=0.75\textwidth, xtick = {},
+         [xmin = 0, xmax = 5, ymin = 1, xlabel = {Time (minutes)}, ylabel = {Temperature (degrees Celsius)}, width = \textwidth, height=0.75\textwidth, xtick = {},
          ytick = {2.5, 5},
          yticklabels = {\(T_{0}\), \(T_{f}\)},
          legend cell align= {left}, legend pos = south east]
@@ -261,6 +270,7 @@
        \end{axis}
      \end{tikzpicture}
    \end{center}
+   Note that the graph only displays the right half of the logistic growth model, the idea being that the water's temperature increases less quickly over time and the snail's body temperature increases accordingly.
 
    \section{Conclusion}
    The approach taken in solving this problem involves forming a model based on given data and using this model to form a differential equation.
@@ -272,7 +282,9 @@
    Indeed, it is more reasonable to use a logistic function.
    A more informed claim could be made with a larger data set of times and temperatures in the simulated tide pool.
    Finally, we may still be limited in our differential equation for the temperature of the snail by assuming that the proportion \(k\) is constant.
-   Perhaps it would be more accurate as a function of time or some other parameter.
+   It is likely that the snail's body responds to higher body temperatures and attempts to maintain a stable body temperature.
+   Thus, the proportion \(k\) is much more likely to be a function of \(S\).
+   Although it isn't possible to determine with the given data, it would be plausible to estimate given a dataset measuring how the snail's body temperature changes over time or over various ambient temperatures.
 
 
 
