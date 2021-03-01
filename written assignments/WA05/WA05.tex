@@ -1,0 +1,135 @@
+\documentclass[11pt, titlepage]{article}
+\input{../../preamble}
+
+% Opening
+\title{Math 2552 Written HW Set 5}
+\author{Akash Narayanan}
+\date{March 2, 2021}
+
+\begin{document}
+  \maketitle
+
+  % Trench 5.1 #11
+  \begin{problem}[Trench 5.1.11]
+    Find a second solution \(y_{2}\) that isn't a constant multiple of the solution \(y_{1}\).
+    Choose \(K\) to conveniently simply \(y_{2}\).
+    \begin{equation*}
+      y'' - 6y' + 9y = 0; \quad y_{1} = e^{3x}
+    \end{equation*}
+  \end{problem}
+
+  \begin{solution}
+    Given one nontrivial solution of the differential equation, we can find another using Abel's formula.
+    Exercise 9 shows that a second solution has the form \(y_{2} = u y_{1}\) where
+    \begin{equation*}
+      u' = K \frac{e^{-P(x)}}{y_{1}^{2}(x)}
+    \end{equation*}
+    for arbitrary nonzero constant \(K\).
+    For the given differential equation, \(p(x) = -6\) so we have \(P(x) = \int p(x) \; dx = -6x\).
+    Then we find
+    \begin{align*}
+      u' &= K \frac{e^{-6x}}{(e^{3x})^{2}} = K \\
+      u &= \int K \; dx = Kx
+    \end{align*}
+    which shows that \(y_{2} = Kx e^{3x}\).
+    We can verify that \(y_{2}\) satisfies the differential equation. Indeed,
+    \begin{equation*}
+      y_{2}'' - 6y_{2}' + 9y_{2} = (9kx + 6k) e^{3x} - (18kx + 6k) e^{3x} + 9kxe^{3x} = 0
+    \end{equation*}
+    Certainly \(y_{2}\) is not a constant multiply of \(y_{1}\) since it has a factor of \(x\).
+    Setting \(K = 1\) yields a final solution of
+    \begin{equation*}
+      y_{2} = xe^{3x}
+    \end{equation*}
+  \end{solution}
+
+  \pagebreak
+
+  % Trench 5.2 #13
+  \begin{problem}[Trench 5.2.13]
+    Solve the initial value problem.
+    \begin{equation*}
+      y'' + 14y' + 50y = 0, \quad y(0) = 2, \quad y'(0) = -17
+    \end{equation*}
+  \end{problem}
+
+  \begin{solution}
+    The characterstic polynomial of the differential equation is
+    \begin{equation*}
+      p(r) = r^{2} + 14r + 50 = (r + 7)^{2} + 1
+    \end{equation*}
+    The roots of the characterstic polynomial are \(r_{1} = -7 + i\) and \(r_{2} = -7 - i\).
+    Then the general solution to the differential equation is
+    \begin{equation*}
+      y = c_{1} e^{-7x} \cos(x) + c_{2} e^{-7x} \sin(x)
+    \end{equation*}
+    Differentiating yields
+    \begin{equation*}
+      y' = -7c_{1} e^{-7x} \cos(x) - c_{1} e^{-7x} \sin(x) - 7c_{2} e^{-7x} \sin(x) + c_{2} e^{-7x} \cos(x)
+    \end{equation*}
+    From here, we can use the initial conditions to form the system of equations
+    \begin{align*}
+      2 &= c_{1} \\
+      -17 &= -7c_{1} + c_{2}
+    \end{align*}
+    which has the solution \(c_{1} = 2\) and \(c_{2} = -3\).
+    Thus, the solution to the initial value problem is
+    \begin{equation*}
+      y(x) = 2 e^{-7x} \cos(x) -3 e^{-7x} \sin(x)
+    \end{equation*}
+  \end{solution}
+
+  \pagebreak
+
+  % Trench 6.1 #7
+  \begin{problem}[Trench 6.1.7]
+    A weight stretches a spring 1.5 inches in equilibrium.
+    The weight is initially displaced 8 inches above equilibrium and given a
+    downward velocity of 4 ft/s.
+    Find its displacement for \(t > 0\).
+  \end{problem}
+
+  \begin{solution}
+      The equation of motion is
+      \[
+      my'' + ky = 0,
+      \] 
+      or
+      \[
+      y'' + \frac{k}{m} y = 0.
+      \] 
+      Given that $mg = k \Delta l$, we have $k / m = g / \Delta l$. Using
+      imperial units as in the problem, we have $g = 32 \text{ft/s}^2$.
+      Furthermore, we have $\Delta l = 1/8$ ft. Thus, we find
+      \[
+     \frac{k}{m} = \frac{32}{1/8} = 256 
+      \] 
+      and the differential equation becomes
+      \[
+          y'' + 256 y = 0, \quad y(0) = \frac{2}{3}, \quad y'(0) = -4. 
+      \] 
+      The differential equation has the characteristic equation
+      \[
+      r^2 + 256 = 0
+      \] 
+      which has the solutions $r = \pm 16i$. Then the general solution to the
+      differential equation is
+      \[
+      y = c_1 \cos 16t + c_2 \sin 8t.
+      \] 
+      Differentiating yields
+      \[
+      y' = -16 c_1 \sin 16t + 16 c_2 \cos 16t.
+      \] 
+      Using the initial conditions yields the system of equations
+      \begin{align*}
+          \frac{2}{3} &= c_1 \\
+          -4 &= 16 c_2
+      \end{align*}
+      which has the solution $c_1 = 2/3$ and $c_2 = -1/4$. Thus, the
+      displacement is given by
+      \[
+      y = \frac{2}{3} \cos 16t - \frac{1}{4} \sin 16t.
+      \] 
+  \end{solution}
+\end{document}
