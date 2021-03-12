@@ -1,6 +1,5 @@
 *.log
 *.aux
 *.gz
-**/build
 *.fdb_latexmk
 *.fls
