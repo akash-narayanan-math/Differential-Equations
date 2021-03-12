@@ -1,0 +1,252 @@
+\documentclass[11pt, titlepage]{article}
+\input{../../preamble}
+
+% Opening
+\title{Math 2552 Written HW Set 6}
+\author{Akash Narayanan}
+\date{March 9, 2021}
+
+\begin{document}
+    \maketitle
+
+    % Trench 5.4 #7
+    \begin{problem}[Trench 5.4.7]
+        Find a particular solution.
+        \[
+        y'' - 4y' - 5y = -6 x e^{-x}
+        \] 
+    \end{problem}
+
+    \begin{solution}
+        We find a particular solution using the method of undetermined
+        coefficients. First, we will find the general solution to the homogeneous
+        equation. Note that its characteristic equation is $r^2 - 4r - 5 =
+        (r - 5)(r + 1)$ so the general solution to the homogeneous equation is 
+        \[
+        y_h = c_1 e^{5x} + c_2 e^{-x}.
+        \] 
+        A standard first guess for the particular solution would be $y_p = (ax +
+        b) e^{-x}$. However, note that this particular solution contains a term
+        that is in the general solution to the homogeneous equation. This is
+        problematic because it effectively means that attempting to solve for
+        $a$ and $b$ by plugging the solution into the differential equation
+        would only yield one equation despite having 2 variables. We remedy this
+        by including a factor of $x$. This yields
+        \begin{align*}
+            y_p &= (ax + b) x e^{-x} \\
+            y_p' &= -(ax^2 + (b - 2a)x - b) e^{-x} \\
+            y_p'' &= (ax^2 + (b - 4a) x - 2b + 2a) e^{-x}.
+        \end{align*}
+        Plugging this into the differential equation yields (after a fair bit of
+        simplification)
+        \begin{gather*}
+            (ax^2 + (b - 4a) x - 2b + 2a) e^{-x} + 4 (ax^2 + (b - 2a)x - b)
+            e^{-x} - 5 (ax + b) x e^{-x} = -6xe^{-x} \\
+            \Longrightarrow (-12ax + 2a - 6b) e^{-x} = -6xe^{-x}
+        \end{gather*}
+        Equating terms of equal degree in the polynomial factor, we obtain two
+        equations:
+        \begin{gather*}
+            -12a = -6 \\
+            2a - 6b = 0
+        \end{gather*}
+        This has the solution $a = 1 / 2$ and $b = 1 / 6$. Thus, a particular
+        solution to the differential equation (after distributing the $x$ to the
+        linear equation) is
+        \[
+            y_p = (\frac{1}{2} x^2 + \frac{1}{6} x) e^{-x}.
+        \] 
+    \end{solution}
+
+    \pagebreak
+
+
+    % Trench 5.7 #7
+    \begin{problem}[Trench 5.7.7]
+        Use variation of parameters to find a particular solution, given the
+        solutions $y_1, y_2$ of the complementary equation.
+        \[
+        x^2 y'' + xy' - y = 2 x^2 + 2; \quad y_1 = x, \quad y_2 = \frac{1}{x}
+        \] 
+    \end{problem}
+
+    \begin{solution}
+        Before starting, we will rewrite the differential equation so that
+        $y''$ has coefficient 1:
+        \begin{equation}
+            y'' + \frac{1}{x}y - \frac{1}{x^2}y = 2 + \frac{2}{x^2}
+        \end{equation}
+        Given the fundamental set of solutions to the homogeneous equation, we
+        construct a particular solution of the form
+        \[
+        y_p = u_1 y_1 + u_2 y_2
+        \] 
+        for function $u_1$ and $u_2$. We start by calculating the Wronskian
+        \[
+            W(y_1, y_2) = \det
+            \begin{pmatrix}
+                y_1 & y_2 \\
+                y_1' & y_2'
+            \end{pmatrix} = \det
+            \begin{pmatrix}
+                x & x^{-1} \\
+                1 & -x^{-2}
+            \end{pmatrix} = 
+            -\frac{2}{x}.
+        \] 
+        Then we have  
+        \begin{align*}
+            u_1'(x) &= \frac{-y_2(x) f(x)}{W(y_1, y_2)(x)} =
+            \frac{-x^{-1}(2+2x^{-2})}{-2x^{-1}} = 1 + \frac{1}{x^2} \\
+            u_2'(x) &= \frac{y_1(x) f(x)}{W(y_1, y_2)(x)} = \frac{x
+            (2+2x^{-2})}{-2x^{-1}} = -x^2 - 1
+        \end{align*}
+        where $f(x)$ is the right side of (1).
+        Integrating both functions with respect to $x$ yields
+        \begin{align*}
+            u_1 &= \int 1 + \frac{1}{x^2} \, dx = x - \frac{1}{x} \\
+            u_2 &= \int -x^2 - 1 \, dx = - \frac{x^{3}}{3} - x
+        \end{align*}
+        Thus, a particular solution to the differential equation is
+        \begin{align*}
+            y_p(x) &= \left(x - \frac{1}{x} \right) x + \left( - \frac{x^3}{3} -
+            x \right) \frac{1}{x} \\
+                   &= \frac{2}{3} x^2 - 2
+        \end{align*}
+    \end{solution}
+    \pagebreak
+
+
+    % Trench 10.7 #1
+    \begin{problem}[Trench 10.7.1]
+        Find a particular solution.
+        \[
+        y' = 
+        \begin{bmatrix}
+            -1 & -4 \\
+            -1 & -1
+        \end{bmatrix}
+        y +
+        \begin{bmatrix}
+            21 e^{4t} \\
+            8 e^{-3t}
+        \end{bmatrix}
+        \]  
+    \end{problem}
+
+    \begin{solution}
+        Let $A$ denote the coefficient matrix of $y$. Then  
+        \[
+            \det(A - \lambda I) = \lambda^2 + 2\lambda - 3 = (\lambda + 3)
+            (\lambda - 1)
+        \] 
+        so the eigenvalues of the system are $\lambda_1 = 1$ and $\lambda_2 =
+        -3$. The corresponding eigenvectors are found by solving $(A - \lambda
+        I)\vec{v} = 0$. We have
+        \[
+            (A - I) \vec{v} = 
+        \begin{bmatrix}
+            -2 & -4 \\
+            -1 & -2
+        \end{bmatrix} \vec{v} = 0 \Longrightarrow -x_1 - 2x_2 = 0
+        \Longrightarrow -x_1 = 2x_2
+        \] 
+        Letting $x_2 = 1$, we find the eigenvector corresponding to $\lambda_1 =
+        1$
+        to be
+        \[
+            \vec{v}_1 = 
+            \begin{pmatrix}
+                -2 \\
+                1
+            \end{pmatrix}
+        \] 
+        Similarly, we find
+        \[
+            (A + 3I)\vec{v} = 
+            \begin{bmatrix}
+                2 & -4 \\
+                -1 & 2
+            \end{bmatrix} \vec{v} = 0 \Longrightarrow -x_1 + 2x_2 = 0
+            \Longrightarrow 2x_2 = x_1
+        \] 
+        Letting $x_2 = 1$, we find the eigenvector corresponding to $\lambda_2 =
+        3$ to be
+        \[
+            \vec{v}_2 = 
+            \begin{pmatrix}
+                2 \\
+                1
+            \end{pmatrix}
+        \] 
+        Then the general solution to the homogeneous system is
+        \[
+        y_h = c_1 
+        \begin{pmatrix}
+            -2e^{t} \\
+            e^{t}
+        \end{pmatrix} + c_2
+        \begin{pmatrix}
+            2e^{-3t} \\
+            e^{-3t}
+        \end{pmatrix}
+        \] 
+        The corresponding fundamental matrix is
+        \[
+        Y = 
+        \begin{pmatrix}
+            -2e^{t} & 2e^{-3t} \\
+            e^{t} & e^{-3t}
+        \end{pmatrix}
+        \] 
+        We find
+        \begin{gather*}
+            \det(Y) = -2e^{-2t} - 2e^{-2t} = -4e^{-2t} \\
+            Y^{-1} = \frac{1}{\det(Y)} 
+            \begin{pmatrix}
+                e^{-3t} & -2e^{-3t} \\
+                -e^{t} & -2e^{t}
+            \end{pmatrix} = \frac{1}{4}
+            \begin{pmatrix}
+                -e^{-t} & 2e^{-t} \\
+                e^{3t} & 2e^{3t}
+            \end{pmatrix}
+        \end{gather*}
+        Then a particular solution is
+        \[
+        y_p = Y \int Y^{-1} g \, dt
+        \] 
+        where $g$ is nonhomogeneous part of the system of differential
+        equations. Calculating, we have
+        \begin{align*}
+            y_p &= \frac{1}{4} Y \int 
+            \begin{pmatrix}
+                -e^{-t} & 2e^{-t} \\
+                e^{3t} & 2e^{3t}
+            \end{pmatrix}
+            \begin{pmatrix}
+                21 e^{4t} \\
+                8 e^{-3t}
+            \end{pmatrix} \, dt \\
+                &= \frac{1}{4} Y \int
+                \begin{pmatrix}
+                    -21e^{3t} + 16e^{-4t} \\
+                    21e^{7t} + 16
+                \end{pmatrix} \, dt \\
+                &= \frac{1}{4}
+                \begin{pmatrix}
+                    -2e^{t} & 2e^{-3t} \\
+                    e^{t} & e^{-3t}
+                \end{pmatrix}
+                \begin{pmatrix}
+                    -7e^{3t} - 4e^{-4t} \\
+                    3e^{7t} + 16t
+                \end{pmatrix} \\
+                &= 
+                \begin{pmatrix}
+                    8te^{-3t} + 5e^{4t} + 2e^{-3t} \\
+                    4te^{-3t} - e^{4t} - e^{-3t}
+                \end{pmatrix}
+        \end{align*}
+    \end{solution}
+\end{document}

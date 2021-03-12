@@ -1,0 +1,498 @@
+\documentclass[11pt, titlepage]{article}
+\input{../../preamble}
+\usepackage{fancyhdr}
+\usepackage[
+    top=2cm,
+    bottom=2cm,
+    left=3cm,
+    right=3cm,
+    headheight=17pt,
+    includehead, includefoot, heightrounded,
+]{geometry}
+
+% Header
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{Math 2552 Midterm 2}
+\rhead{Akash Narayanan}
+
+% Opening
+\title{Math 2552 Midterm 2}
+\author{Akash Narayanan}
+\date{March 11, 2021}
+
+\begin{document}
+    \maketitle
+
+    \begin{enumerate}
+        % Problem 1
+        \item (2 points) Determine all values of $\alpha$, if any, for which all
+            solutions tend to zero as $t \to \infty$.
+            \[
+                y'' + (\alpha + 2) y' + 4y = 0, \quad \alpha \in \mathbb{R}
+            \] 
+            Show your work.
+
+            \begin{solution}
+                Consider the characteristic equation $r^2 + (\alpha + 2) + 4 =
+                0$. Using the quadratic formula, it has the following roots:
+                \begin{align*}
+                    r &= \frac{-(\alpha + 2) \pm \sqrt{(\alpha + 2)^2 - 16}}{2}
+                    \\
+                      &= -(1 + \frac{\alpha}{2}) \pm \frac{1}{2} \sqrt{\alpha^2
+                      + 4\alpha - 12}
+                \end{align*}
+                We now treat separate cases based on the value of the sign of
+                the discriminant $d = \alpha^2 + 4\alpha - 12$.
+
+                First consider the case $d < 0$. This occurs when $(\alpha +
+                2)^2 - 16 < 0$, or
+                \begin{gather*}
+                    (\alpha + 2)^2 < 16 \\
+                    -4 < \alpha + 2 < 4 \\
+                    -6 < \alpha < 2
+                \end{gather*}
+                For solutions to converge to zero under this condition, the real
+                part of the roots must be negative. That is, 
+                \begin{gather*}
+                    -(1 + \frac{\alpha}{2}) < 0 \\
+                    2 + \alpha > 0 \\
+                    \alpha > -2
+                \end{gather*}
+                Therefore, solutions converge to zero for $\alpha \in (-2, 2)$.
+
+                Now consider the case $d = 0$, which occurs when $\alpha = 2$.
+                Then the root $r = -2$. Since this is the only root, the
+                solution to the differential equation is
+                 \[
+                y = c_1 e^{-2t} + c_2 t e^{-2t}
+                \] 
+                which clearly converges to zero as $t$ goes to infinity.
+
+                Finally, consider the case $d > 0$. This occurs when $(\alpha +
+                2)^2 - 16 > 0$, or
+                \begin{gather*}
+                    (\alpha + 2)^2 > 16 \\
+                    |\alpha + 2| > 4 \\
+                    \alpha + 2 > 4 \quad \text{or} \quad -\alpha - 2 > 4 \\
+                    \alpha > 2 \quad \text{or} \quad \alpha < -6
+                \end{gather*}
+                Note that if $\alpha < -2$ then $r > 0$ for at least one of the
+                roots (because the vertex is positive and there is one root
+                greater than the vertex) so at least one of the solutions will
+                diverge as $t$ goes to infinity.
+                Thus, we can restrict our attention to $\alpha >
+                2$. We require that the root closest to zero still be negative.
+                As an inequality, we obtain
+                 \begin{gather*}
+                    -\frac{\alpha}{2}-1 + \frac{1}{2}\sqrt{\alpha^2 + 4\alpha -
+                    12} < 0 \\
+                    \sqrt{\alpha^2 + 4\alpha -12} < \alpha + 2 \\
+                    \alpha^2 + 4\alpha - 12 < \alpha^2 + 4\alpha + 4 \\
+                    0 < 16
+                \end{gather*}
+                Since the inequality holds trivially, we have that both roots of
+                the characteristic equation are negative if $\alpha > 2$. 
+                Thus, all solutions to the differential equation converge to
+                zero as $t$ goes to infinity if and only if $\alpha > -2$.
+            \end{solution}
+        \pagebreak
+
+        % Problem 2
+        \item (2 points) Determine whether the functions $y_1 = e^{2t}$ and $y_2
+            = e^{3t}$ are a fundamental set of solutions to the differential
+            equation $y'' + 5y' + 6y=0$ with $y = y(t)$. Show your work.
+
+            \begin{solution}
+                We can check by first seeing if the functions satisfy the
+                differential equation. We find
+                \[
+                y_1'' + 5y_1' + 6y_1 = 4e^{2t} + 10e^{2t} + 6e^{2t} \neq 0
+                \] 
+                Since $y_1$ does not satisfy the differential equation, the set
+                $\{y_1, y_2\}$ is not a fundamental set of solutions.
+            \end{solution}
+        \pagebreak
+
+        % Problem 3
+        \item (1 point) State whether the following differential equation is
+            linear or non-linear, and whether it is homogeneous or
+            non-homogeneous.
+            \[
+                y'' + (1-y)y' + 2y = 1
+            \] 
+            \begin{solution}
+                The differential equation is non-linear and non-homogeneous. It
+                is non-linear because there is a term $y y'$ which is not a
+                linear combination of $y$ and its derivatives. It is
+                non-homogeneous because there is a non-zero constant term,
+                namely $1$.
+            \end{solution}
+        \pagebreak
+
+        % Problem 4
+        \item (3 points) Construct an initial value problem for the following
+            situation. Show your work.
+
+            A 0.05 Newtons (N) force stretches a spring 0.01 m. A mass weighing
+            2 kg is attached to the spring, and the spring is also attached to a
+            viscous damper that applies a force of 0.4 N when the velocity of
+            the mass is 0.1 m/s. The mass is pulled down 0.1 m below its
+            equilibrium position and given an initial upward velocity of 0.6 m/s.
+
+            \begin{solution}
+                By Newton's Laws, we have $F = kL$.
+                Substituting, we find $0.05 = 0.01 k$ so $k = 5$. Similarly, the
+                damping force is given by the equation $F_d = \gamma v$.
+                Substituting the corresponding values yields $0.4 = 0.1 \gamma$
+                so $\gamma = 4$. Given the initial conditions, the corresponding
+                initial value problem is
+                \[
+                    2y'' + 4y' + 5 = 0, \quad y(0) = 0.1, \quad y'(0) = -4
+                \] 
+            \end{solution}
+        \pagebreak
+
+        % Problem 5
+        \item (3 points) If $Y = W[f, g]$ is the Wronskian of $f$ and $g$, and
+            $u = 3f + g$, $v = f - 3g$, express the Wronskian $W[u, v]$ of $u$
+            and $v$ in terms of $Y$. Show your work.
+
+            \begin{solution}
+                First, note that $Y = fg' - f'g$. We find that
+                \begin{align*}
+                    W[u, v] &= uv' - u'v \\
+                            &= (3f+g)(f'-3g') - (3f'+g')(f-3g) \\
+                            &= (3ff' - 9fg' + gf' - 3gg' - 3ff' + 9f'g + fg' +
+                            3gg' \\
+                            &= -8(fg' - f'g) \\
+                            &= -8Y
+                \end{align*}
+            \end{solution}
+        \pagebreak
+
+        % Problem 6
+        \item (3 points) Determine a suitable form for the particular solution
+            $Y(t)$ if the method of undetermined coefficients is to be used.
+            Please show your work.
+            \[
+                y'' + 11y' + 24y = 4 \sin(4t) + 2e^{-8t}
+            \] 
+            \begin{solution}
+                We start by considering the general solution to the homogeneous
+                equation:
+                \[
+                y_h'' + 11y_h' + 24y_h = 0
+                \] 
+                The characteristic equation is $r^2 + 11r + 24 = 0$ which has
+                solutions $r_1 = -8$ and $r_2 = -3$. Then the solution to the
+                homogeneous equation is
+                \[
+                y_h = c_1 e^{-8t} + c_2 e^{-3t}
+                \] 
+                Through inspection, one might guess that a particular solution
+                would have the form
+                \[
+                    Y(t) = a_1 \sin(4t) + a_2 \cos(4t) + a_3 e^{-8t}
+                \] 
+                However, note that $e^{-8t}$ is a solution to the homogeneous
+                equation. We remedy this by including a factor of $t$.
+                Therefore, a suitable form for a particular solution using the
+                method of undetermined coefficients is
+                \[
+                    Y(t) = a_1 \sin(4t) + a_2 \cos(4t) + a_3 t e^{-8t}
+                \] 
+            \end{solution}
+        \pagebreak
+
+        % Problem 7
+        \item (4 points) The position of a moving object, $y(t)$, for time $t
+            \geq 0$ satisfies the IVP
+            \[
+                y'' + 2y' + 4y = 0, \quad y(0) = 1, \; y'(0) = 4, \quad y = y(t)
+            \] 
+            \begin{enumerate}[label={(\alph*)}]
+            \item Express the differential equation in the IVP as a first-order
+                system in the form $\vec{x}' = A \vec{x}$.
+            \item Solve the DE using any method you like. You do not need to
+                solve the IVP, but show your work.
+            \item Sketch the trajectory of the object for $t \geq 0$ in the
+                phase plane. Indicate the location of the object at time $t =
+                0$, the direction of motion, and label your axes.
+            \end{enumerate}
+
+            \begin{solution}
+                Let $x_1 = y$ and $x_2 = y'$. Then we find $x_1' = y' = x_2$ and
+                $x_2' = -4y - 2y' = -4x_1 - 2x_2$. In matrix form, this can be
+                expressed as
+                \[
+                    \vec{x}' = 
+                    \begin{pmatrix}
+                        0 & 1 \\
+                        -4 & -2
+                    \end{pmatrix} \vec{x}, \quad \vec{x}(0) =
+                    \begin{pmatrix}
+                        1 \\
+                        4
+                    \end{pmatrix}
+                \] 
+                To solve the homogeneous differential equation, consider the
+                characteristic equation $r^2 + 2r + 4 = 0$ which has solutions
+                $r = -1 \pm i\sqrt{3}$. Then the general solution is
+                \[
+                    y = e^{-t} \left(c_1 \cos(\sqrt{3} t) + c_2 \sin(\sqrt{3} t)
+                    \right)
+                \] 
+
+                \begin{figure}[h]
+                    \centering
+                    \def\svgwidth{0.7\columnwidth}
+                    \import{media/}{phasePortrait7.pdf_tex}
+                \end{figure}
+            \end{solution}
+        \pagebreak
+
+        % Problem 8
+        \item (10 points) Use the variation of parameters method to identify the
+            general solution to
+            \[
+                \vec{x}' = 
+                \begin{pmatrix}
+                    2 & 4 \\
+                    4 & 2
+                \end{pmatrix} \vec{x} +
+                \begin{pmatrix}
+                    12 \\
+                    0
+                \end{pmatrix}
+            \]
+            \begin{solution}
+                Let $A$ be the coefficient matrix of $\vec{x}$. Then
+                \[
+                    \det(A - \lambda I) = \lambda^2 - 4\lambda - 12 = (\lambda +
+                    2) (\lambda - 6) = 0
+                \] 
+                and the eigenvalues of the system are $\lambda_1 = -2$ and
+                $\lambda_2 = 6$. The corresponding eigenvectors can be found by
+                solving the equation $(A - \lambda I) \vec{v} = 0$. We have
+                \[
+                    (A + 2I) \vec{v}_1 =
+                    \begin{pmatrix}
+                        4 & 4 \\
+                        4 & 4
+                    \end{pmatrix} \vec{v}_1 = 0 \Longrightarrow
+                    4x_1 + 4x_2 = 0 \Longrightarrow
+                    x_1 = -x_2
+                \] 
+                Letting $x_2 = -1$, we find the eigenvector corresponding to
+                $\lambda_1 = -2$ to be
+                \[
+                    \vec{v}_1 =
+                    \begin{pmatrix}
+                        1 \\
+                        -1
+                    \end{pmatrix}
+                \] 
+                Solving for $\vec{v}_2$, we find
+                \[
+                    (A - 6I) \vec{v}_2 = 
+                    \begin{pmatrix}
+                        -4 & 4 \\
+                        4 & -4
+                    \end{pmatrix} \vec{v}_2 = 0 \Longrightarrow
+                    4x_1 - 4x_2 = 0 \Longrightarrow
+                    x_1 = x_2
+                \] 
+                Letting $x_2 = 1$, we find the eigenvector corresponding to
+                $\lambda_2 = 6$ to be
+                \[
+                    \vec{v}_2 = 
+                    \begin{pmatrix}
+                        1 \\
+                        1
+                    \end{pmatrix}
+                \] 
+                Then the solution to the homogeneous system is
+                \[
+                y_h = c_1 e^{-2t}
+                \begin{pmatrix}
+                    1 \\
+                    -1
+                \end{pmatrix} + c_2 e^{6t}
+                \begin{pmatrix}
+                    1 \\
+                    1
+                \end{pmatrix}
+                \] 
+                The corresponding fundamental matrix is
+                \[
+                X = 
+                \begin{pmatrix}
+                    e^{-2t} & e^{6t} \\
+                    -e^{-2t} & e^{6t}
+                \end{pmatrix}
+                \] 
+                We calculate
+                \begin{gather*}
+                    \det(X) = e^{4t} + e^{4t} = 2e^{4t} \\
+                    X^{-1} = \frac{1}{\det(X)}
+                    \begin{pmatrix}
+                        e^{6t} & -e^{6t} \\
+                        e^{-2t} & e^{-2t}
+                    \end{pmatrix} = \frac{1}{2}
+                    \begin{pmatrix}
+                        e^{2t} & -e^{2t} \\
+                        e^{-6t} & e^{-6t} 
+                    \end{pmatrix}
+                \end{gather*}
+                A particular solution is
+                \[
+                y_p = X \int X^{-1} g \, dt
+                \] 
+                where $g$ is the non-homogeneous part of the system of
+                differential equations. Calculating, we find
+                \begin{align*}
+                    y_p &= \frac{1}{2} X \int
+                    \begin{pmatrix}
+                        e^{2t} & -e^{2t} \\
+                        e^{-6t} & e^{-6t} 
+                    \end{pmatrix}
+                    \begin{pmatrix}
+                        12 \\
+                        0
+                    \end{pmatrix} \, dt \\
+                        &= \frac{1}{2} X \int
+                    \begin{pmatrix}
+                        12e^{2t} \\
+                        12e^{-6t}
+                    \end{pmatrix} \, dt \\
+                        &= \frac{1}{2}
+                    \begin{pmatrix}
+                        e^{-2t} & e^{6t} \\
+                        -e^{-2t} & e^{6t}
+                    \end{pmatrix}
+                    \begin{pmatrix}
+                        6e^{2t} \\
+                        -2e^{-6t}
+                    \end{pmatrix} \\
+                        &=
+                    \begin{pmatrix}
+                        2 \\
+                        -4
+                    \end{pmatrix}
+                \end{align*}
+                Then the general solution to the system of differential
+                equations is
+                \[
+                    \vec{x} = c_1 e^{-2t}
+                    \begin{pmatrix}
+                        1 \\
+                        -1
+                    \end{pmatrix} + c_2 e^{6t}
+                    \begin{pmatrix}
+                        1 \\
+                        1
+                    \end{pmatrix} +
+                    \begin{pmatrix}
+                        2 \\
+                        -4
+                    \end{pmatrix}
+                \] 
+            \end{solution}
+
+        \pagebreak
+
+        % Problem 9
+        \item (10 points) Solve the DE. Show your work.
+            \[
+                y'' + 25y = 60 \cos(5t), \quad y = y(t)
+            \] 
+
+            \begin{solution}
+                We first consider the homogeneous equation
+                \[
+                y_h'' + 25y_h = 0
+                \] 
+                The characteristic equation is $r^2 + 25 = 0$ which has
+                solutions $r = \pm 5i$. Then the general form for the
+                homogeneous solution is
+                \[
+                    y_h = c_1 \cos(5t) + c_2 \sin(5t)
+                \] 
+                We find a particular solution using the method of undetermined
+                coefficients. Assume that a particular solution has the form
+                \[
+                    y_p = At \cos(5t) + Bt \sin(5t)
+                \] 
+                Then we have
+                \begin{gather*}
+                    y_p' = (5Bt + A) \cos(5t) + (B - 5At) \sin(5t) \\
+                    y_p'' = (10B - 25At) \cos(5t) - (25Bt + 10A) \sin(5t)
+                \end{gather*}
+                Substituting this into the differential equation, we obtain
+                \begin{align*}
+                    y_p'' + 25y_p &= (10B - 25At) \cos(5t) - (25Bt + 10A)
+                    \sin(5t) + 25(At \cos(5t) + Bt \sin(5t)) \\
+                                  &= 10B \cos(5t) - 10A \sin(5t) = 60 \cos(5t)
+                \end{align*}
+                That is, $A = 0$ and $B = 6$ so a particular solution is
+                \[
+                    y_p = 6t \sin(5t)
+                \] 
+                Thus, the general solution to the differential equation is
+                \[
+                    y(t) = c_1 \cos(5t) + c_2 \sin(5t) + 6t \sin(5t)
+                \] 
+            \end{solution}
+        \pagebreak
+
+        % Problem 10
+        \item (10 points) Solve the DE using variation of parameters. Solutions
+            to the homogeneous problem are $y_1 = t^2$ and $y_2 = t^{-2}$.
+            Please show your work.
+            \[
+                t^2 y'' + ty' - 4y = t, \quad y = y(t), \quad t > 0
+            \] 
+            \begin{solution}
+                We start by rewriting the differential equation in standard
+                form:
+                \[
+                y'' + \frac{1}{t}y' - \frac{4}{t^2}y = \frac{1}{t}
+                \] 
+                Given the fundamental set of solutions, we can construct a
+                particular solution of the form
+                \[
+                y_p = u_1 y_1 + u_2 y_2
+                \] 
+                for functions $u_1$ and $u_2$.
+                We first calculate the Wronskian
+                \begin{align*}
+                    W[y_1, y_2] &= y_1 y_2' - y_1' y_2 \\
+                              &= t^2 (-2t^{-3}) - (2t)(t^{-2}) \\
+                                &= -4t^{-1}
+                \end{align*}
+                Then we have
+                \begin{gather*}
+                    u_1'(t) = \frac{-y_2(t) g(t)}{W[y_1, y_2]} = \frac{-t^{-2}
+                    \cdot t^{-1}}{-4t^{-1}} = \frac{1}{4t^2} \\
+                    u_2'(t) = \frac{y_1(t) g(t)}{W[y_1, y_2]} = \frac{t^2 \cdot
+                    t^{-1}}{-4t^{-1}} = -\frac{t^2}{4}
+                \end{gather*}
+                where $g(t)$ is the non-homogeneous part of the standard form
+                differential equation. Integrating with respect to $t$ yields
+                \begin{gather*}
+                    u_1 = \int \frac{1}{4t^2} \, dt = -\frac{1}{4t} \\
+                    u_2 = \int -\frac{t^2}{4} \, dt = -\frac{t^3}{12}
+                \end{gather*}
+                Then a particular solution to the differential equation is
+                \begin{align*}
+                    y_p &= -\frac{1}{4t} t^2 - \frac{t^3}{12} t^{-2} \\
+                        &= -\frac{t}{3}
+                \end{align*}
+                Finally, the general solution to the differential equation is
+                \[
+                    y(t) = c_1 t^2 + c_2 t^{-2} - \frac{t}{3}
+                \] 
+            \end{solution}
+    \end{enumerate}
+\end{document}
