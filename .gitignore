@@ -3,3 +3,5 @@
 *.gz
 *.fdb_latexmk
 *.fls
+.idea
+
