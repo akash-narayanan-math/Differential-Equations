@@ -3,6 +3,8 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 # Constants for the problem
+x_0 = 5
+y_0 = 0
 b = 6
 w = 2
 
@@ -52,7 +54,7 @@ def runge_kutta(x_0, y_0, x, n):
 
 
 def main():
-    point_list = runge_kutta(5, 0, 0, 100)
+    point_list = runge_kutta(x_0, y_0, 0, 100)
     df = pd.DataFrame(point_list, columns=['x', 'y'])
     print(df)
     with pd.option_context('display.precision', 5):

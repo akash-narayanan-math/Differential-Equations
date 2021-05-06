@@ -179,6 +179,16 @@
         \caption{\label{fig:overlay-2} The approximate solution to the problem
         with values $b = 2$, $w = 3$.}
     \end{figure}
+    It is clear that solution curves which pass through the origin exist if the
+    initial position lies on the y-axis (specifically with a negative y value).
+    However, it is difficult to determine if solution curves exist for initial
+    positions slightly offset from the y-axis. I conjecture that such solution
+    curves do exist, and the corresponding initial positions might form a quadratic
+    curve which passes through the origin. However, I strongly struggle with
+    establishing a solid basis for this. Furthermore, testing this conjecture
+    with programming is difficult due to limitations in the accuracy of my model
+    because of floating point errors (which cause the velocity vector to become
+    massive near the origin).
 
     \section{Conclusion}
     Although some initial analysis and reinterpretation of the problem posed was
@@ -196,7 +206,15 @@
     but may yield more interesting nullclines and further analysis.
     Additionally, one could drop the requirement that the system be autonomous
     and consider solutions to the problem if the wind speed or drone speed were
-    to change as functions of both time and position.
+    to change as functions of both time and position. 
+
+    This is perhaps the most realistic model of the situation, though I struggle
+    to imagine such a system has a nice analytical solution. Visualizing a
+    time-dependent system may involve using three-dimensional space to include
+    the extra parameter with which we could demonstrate how the vector field
+    shifts over time. While a solution curve in this model would be three
+    dimensional, projecting it back onto the plane would show the drone's path
+    as the wind changes with both time and position.
 
     \pagebreak
 
